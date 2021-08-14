@@ -1,7 +1,8 @@
 import {
   INIT_PHOTO_POST, LOADING_TRUE, LOADING_FALSE, TOAST_VIEW, SET_USER, DEL_USER,
   GET_FAVORITES, GET_OWN_PHOTOS, TOAST_HIDE, GET_SEARCHED, GLOBAL_LOADING_TRUE,
-  GLOBAL_LOADING_FALSE
+  GLOBAL_LOADING_FALSE,
+  SET_PHOTOS
 } from "./consts";
 import request from '../libs/request'
 import { AppThunk, AuthDelUserActionType, AuthSetUserActionType, FavoriteActionType, GalleryActionType, GetOwnPhotoActionType, LoadingActionType, SearchActonType, ToastHideActionType, ToastViewActionType } from "../utils/actionTypes";
@@ -11,10 +12,63 @@ const photoGetURL = 'http://localhost:5000/api/photo/posts'
 const photoPostURL = 'http://localhost:5000/upload/new'
 const favoriteURL = 'http://localhost:5000/favorite'
 const authURL = 'http://localhost:5000/api/auth'
+const likeUrl = 'http://localhost:5000/api/photo/like'
+const unlikeUrl = 'http://localhost:5000/api/photo/unlike'
 const nativeUrl = 'http://localhost:5000'
 
 
 // ----- Async functions
+
+// Like functions
+
+export function likePhoto(post: PostType): AppThunk {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(likeUrl + '/' + post.id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }      
+      })
+  
+      const data = await res.json()
+      const postsReq = await fetch(photoGetURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      const posts = await postsReq.json()
+      console.log(posts)
+
+      dispatch(setPhotos(posts))
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+}
+
+export function unlikePhoto(post: PostType): AppThunk {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(unlikeUrl + '/' + post.id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }      
+      })
+  
+      const data = await res.json()
+      const postsReq = await fetch(photoGetURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      const posts = await postsReq.json()
+      console.log(posts)
+      dispatch(setPhotos(posts))      
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+}
 
 
 // Photos functions
@@ -22,7 +76,9 @@ const nativeUrl = 'http://localhost:5000'
 export function initPhotosAsync(): AppThunk {
   return async (dispatch) => {
     dispatch(beginLoading())
-    const res = await request(photoGetURL)
+    const res = await request(photoGetURL, 'GET', null, {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    })
     dispatch(endLoading())
     dispatch(initPhotos(res))
   }
@@ -285,6 +341,10 @@ export function initPhotos(posts: PostType[]): GalleryActionType {
 
 export function getOwnPhotos(photos: PostType[]): GetOwnPhotoActionType {
   return { type: GET_OWN_PHOTOS, payload: photos }
+}
+
+export function setPhotos(posts: PostType[]): GalleryActionType {
+  return {type: SET_PHOTOS, payload: posts}
 }
 
 // Auth functions

@@ -31,3 +31,7 @@ export type GetOwnPhotosReduceType = {
 export type SearchReduceType = {
   searched: Array<PostType>
 }
+
+export type LikeReduceType = {
+  message: string
+}

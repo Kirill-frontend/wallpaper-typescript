@@ -3,7 +3,7 @@ const config = require('config')
 
 const urlPost = config.get('URL-Photos')
 
-// ADD_FAV, REM_FAV, ADD_DOWNLOAD
+// ADD_FAV, REM_FAV, ADD_DOWNLOAD, LIKE_PHOTO, UNLIKE_PHOTO
 async function statisticPhoto(type, postId) {
   try {
     const responsePost = await fetch(urlPost + '/' + postId)
@@ -19,6 +19,10 @@ async function statisticPhoto(type, postId) {
       post.statistic.favorites = --post.statistic.favorites
     } else if (type === 'ADD_DOWNLOAD') {
       post.statistic.downloads = ++post.statistic.downloads
+    } else if (type === 'LIKE_PHOTO') {
+      post.statistic.likes = ++post.statistic.likes
+    } else if (type === 'UNLIKE_PHOTO') {
+      post.statistic.likes = --post.statistic.likes
     }
 
     const pathPost = await fetch(urlPost + '/' + postId, {

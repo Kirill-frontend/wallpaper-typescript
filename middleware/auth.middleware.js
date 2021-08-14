@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     req.user = decoded    
     next()
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(401).json({message: 'No auth'})
   }
 }

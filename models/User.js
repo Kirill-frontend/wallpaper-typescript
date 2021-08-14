@@ -7,7 +7,8 @@ function User(email, password, username) {
     username,
     id: v4(),
     favorites: [],
-    posts: []
+    posts: [],
+    liked: []
   }
 
   return JSON.stringify(user)

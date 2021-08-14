@@ -173,6 +173,3 @@ router.get('/get', authMiddleware, async (req, res) => {
 
 
 module.exports = router
-
-//Fetch можно вынести в функцию +
-// Code review +

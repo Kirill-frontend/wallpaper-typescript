@@ -1,5 +1,6 @@
 export const CREATE_PHOTO_POST = 'CREATE_PHOTO_POST'
 export const INIT_PHOTO_POST = 'INIT_PHOTO_POST'
+export const SET_PHOTOS = 'SET_PHOTOS'
 
 export const FAVORITES = 'FAVORITES'
 
@@ -21,3 +22,5 @@ export const GET_FAVORITES = 'GET_FAVORITES'
 export const GET_OWN_PHOTOS = 'GET_OWN_PHOTOS'
 export const GET_SEARCHED = 'GET_SEARCHED'
 
+export const LIKE_A_PHOTO = 'LIKE_A_PHOTO'
+export const UNLIKE_A_PHOTO = 'UNLIKE_A_PHOTO'

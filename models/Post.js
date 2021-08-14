@@ -9,8 +9,9 @@ function Post(title, filename, author, tags) {
     tags,
     statistic: {
       favorites: 0,
-      downloads: 0
-    }
+      downloads: 0,
+      likes: 0
+    }    
   }
 
   return post

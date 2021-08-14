@@ -1,6 +1,7 @@
 export type PostStatisticType = {
   favorites: number
   downloads: number
+  like: number
 }
 
 export type PostType = {
@@ -10,6 +11,7 @@ export type PostType = {
   statistic: PostStatisticType
   tags: string[]
   photo: string
+  isLike: boolean
 }
 
 export type CurrentUserType = {

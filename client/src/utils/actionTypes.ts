@@ -1,12 +1,12 @@
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { CREATE_PHOTO_POST, DEL_USER, FAVORITES, GET_FAVORITES, GET_OWN_PHOTOS, GET_SEARCHED, GLOBAL_LOADING_FALSE, GLOBAL_LOADING_TRUE, INIT_PHOTO_POST, LOADING_FALSE, LOADING_TRUE, SET_USER, TOAST_HIDE, TOAST_VIEW } from "../redux/consts";
+import { CREATE_PHOTO_POST, DEL_USER, FAVORITES, GET_FAVORITES, GET_OWN_PHOTOS, GET_SEARCHED, GLOBAL_LOADING_FALSE, GLOBAL_LOADING_TRUE, INIT_PHOTO_POST, LIKE_A_PHOTO, LOADING_FALSE, LOADING_TRUE, SET_PHOTOS, SET_USER, TOAST_HIDE, TOAST_VIEW, UNLIKE_A_PHOTO } from "../redux/consts";
 import { RootState } from "../redux/reducers";
 import { CurrentUserType } from "./types";
 import { PostType } from "./types";
 
 export type GalleryActionType = {
-  type: typeof INIT_PHOTO_POST | typeof CREATE_PHOTO_POST | typeof FAVORITES
+  type: typeof INIT_PHOTO_POST | typeof CREATE_PHOTO_POST | typeof FAVORITES | typeof SET_PHOTOS
   payload: Array<PostType>
 }
 
@@ -46,6 +46,11 @@ export type ToastViewActionType = {
 
 export type ToastHideActionType = {
   type: typeof TOAST_HIDE  
+}
+
+export type LikePhoto = {
+  type: typeof LIKE_A_PHOTO | typeof UNLIKE_A_PHOTO
+  payload: string // Photo ID
 }
 
 export type AppThunk<ReturnType = void> = ThunkAction<

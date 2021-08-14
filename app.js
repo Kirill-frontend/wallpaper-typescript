@@ -77,9 +77,11 @@ app.use('/search', require('./routes/search.routes'))
 // Сделать анимации в модалке +
 // Обработать ошибки когда БД чист +
 // Email verify
-// Dark Themes
+// Dark Theme
 // Посмотреть посты пользователя
 // Подписки на пользователя
-// Обратная связь 
+// Обратная связь +
+// Вынести получение данных в функцию
+// Likes +
 
 app.listen(PORT, () => console.log(`Server has been started  http://localhost:${PORT} ...`))

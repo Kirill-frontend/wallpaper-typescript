@@ -70,8 +70,28 @@ ul {
   font-size: 16px;
 }
 
-.btn-floating {
-  transition: all ease-in .5s;      
+.card-tags {
+  position: absolute;
+  bottom: 0;
+  left: 70px;
+}
+
+.card-tag {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.card-tag:first-child {
+  margin-left: 0;
+}
+
+.card-tag:hover {
+  text-decoration: underline;
+}
+
+.btn-like {
+  right: 80px!important;  
+  transition: none!important;
 }
 
 .btn-deletePhoto {  
@@ -81,10 +101,6 @@ ul {
   padding: 0 5px;
 }
 
-.btn-floating:hover {
-  transform: rotate(180deg);  
-  box-shadow: none;
-}
 
 .btn-login {
   margin: 0 15px 0 0;

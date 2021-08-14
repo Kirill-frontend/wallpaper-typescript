@@ -1,6 +1,6 @@
 import { GalleryActionType } from "../../utils/actionTypes"
 import { PostType } from "../../utils/types"
-import { CREATE_PHOTO_POST, FAVORITES, INIT_PHOTO_POST } from "../consts"
+import { CREATE_PHOTO_POST, FAVORITES, INIT_PHOTO_POST, SET_PHOTOS } from "../consts"
 
 type InitialGalleryStateType = {
   posts: PostType[]
@@ -23,6 +23,10 @@ export default function galleryReduce(state = initialState, action: GalleryActio
 
   if (action.type === FAVORITES) {
     return { ...state, favorites: action.payload }
+  }
+
+  if (action.type === SET_PHOTOS) {
+    return {...state, posts: action.payload}
   }
 
   return state
