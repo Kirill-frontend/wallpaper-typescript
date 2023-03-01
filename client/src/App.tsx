@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { authAsync, toastHide } from './redux/actions';
 
 import Home from './pages/Home';
 import Create from './pages/Create';
@@ -13,29 +12,34 @@ import MyPosts from './pages/Profile/MyPosts';
 import Registrate from './pages/Registrate';
 import Search from './pages/Search';
 import GlobalLoader from './components/GlobalLoader'
+import { RootState } from './redux/store';
+import { auth } from './redux/slicers/auth.slice';
 
-import { RootState } from './redux/reducers/index'
+
 
 import 'materialize-css/dist/css/materialize.css'
+import "materialize-css/dist/js/materialize"
 import Feedback from './pages/Feedback';
+import { hideToast } from './redux/slicers/toast.slice';
+
 
 function App() {
   // materialize.AutoInit()
 
   const dispatch = useDispatch()
-  const toastMessage = useSelector((state: RootState) => state.toastReduce.message)
-  const toastView = useSelector((state: RootState) => state.toastReduce.show)
-  const isLoading = useSelector((state: RootState) => state.loadingReduce.globalLoading)
+  const toastMessage = useSelector((state: RootState) => state.toast.message)
+  const toastView = useSelector((state: RootState) => state.toast.show)
+  const isLoading = useSelector((state: RootState) => state.loading.globalLoading)
 
 
   useEffect(() => {
-    dispatch(authAsync())
+    dispatch(auth())
   }, [dispatch])
 
   useEffect(() => {
     if (toastView) {
-      // materialize.toast({ html: toastMessage })
-      dispatch(toastHide())
+      
+      // dispatch(hideToast())
     }
   }, [toastMessage, toastView, dispatch])
 

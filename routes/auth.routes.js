@@ -91,7 +91,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Password not sync' })
     }
 
-
+    console.log(email)
     const token = jwt.sign({ id: user[0].id }, config.get('Secret-Key'), { expiresIn: '24h' })    
 
     return res.json({
@@ -121,7 +121,7 @@ router.get('/auth', authMiddleware, async (req, res) => {
     const token = jwt.sign({ id: user.id }, config.get('Secret-Key'), { expiresIn: '1h' })    
 
     return res.json({
-      message: 'You success register',
+      message: 'Success log in',
       token,
       user: {
         id: user.id,       

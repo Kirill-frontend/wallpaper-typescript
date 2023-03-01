@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Navbar';
-import { downloadPhoto, getFavoritesAsync } from '../redux/actions';
+import { downloadPhoto } from '../redux/slicers/gallery.slice';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import Nothing from '../components/Nothing';
 import FavoritePhoto from '../components/FavoritePhoto';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
 import { PostType } from '../utils/types'
+import { getFavorites } from './../redux/slicers/favorites.slice';
 
 
 const Favorite: React.FC = () => {
@@ -17,13 +18,13 @@ const Favorite: React.FC = () => {
 
   const dispatch = useDispatch()
 
-  const auth = useSelector((state: RootState) => (state.authReduce.isAuth))
-  const isLoading = useSelector((state: RootState) => (state.loadingReduce.loading))
-  const postsState = useSelector((state: RootState) => (state.favoriteReduce.favorites))
+  const auth = useSelector((state: RootState) => (state.auth.isAuth))
+  const isLoading = useSelector((state: RootState) => (state.loading.loading))
+  const postsState = useSelector((state: RootState) => (state.favorite.favorites))
 
   useEffect(() => {
     if (auth) {
-      dispatch(getFavoritesAsync())
+      dispatch(getFavorites())
     }
   }, [dispatch, auth])
 

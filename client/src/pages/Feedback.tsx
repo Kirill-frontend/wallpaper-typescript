@@ -2,18 +2,17 @@ import React, { FormEvent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Navbar from '../components/Navbar'
-import { feedbackSendAsync } from '../redux/actions'
-import { RootState } from '../redux/reducers'
+import { RootState } from '../redux/store';
 
 const Feedback: React.FC = () => {
   const [value, setValue] = useState<string>('')
   const dispatch = useDispatch()
 
-  const isLoading = useSelector((state: RootState) => state.loadingReduce.loading)
+  const isLoading = useSelector((state: RootState) => state.loading.loading)
   
   const FeedbackHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    dispatch(feedbackSendAsync(value))
+    // dispatch(feedbackSendAsync(value))
   }
 
   return (

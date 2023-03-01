@@ -27,6 +27,7 @@ const Modal: React.FC<ModalPropsType> = ({ close, statistic }) => {
           <h4>Statistic</h4>
           <p>{`Added favorites: ${statistic!.favorites}`}</p>
           <p>{`Downloads: ${statistic!.downloads}`}</p>                        
+          <p>{`Likes: ${statistic!.likes}`}</p>                        
         </div>
       </div>
     </>

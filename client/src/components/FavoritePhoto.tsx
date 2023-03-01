@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeFromFavoriteAsync } from '../redux/actions';
+import { removeFromFavorite } from '../redux/slicers/favorites.slice';
 import { HandlersType, PostType } from '../utils/types';
 import Popup from './Popup';
 
@@ -18,7 +18,7 @@ const FavoritePhoto: React.FC<FavoritePhotoType> = ({ options, handlers }) => {
   const favoriteDeleteHandler = (): void => {
     setDoAnim(true)
     setTimeout(() => {
-      dispatch(removeFromFavoriteAsync(options))
+      dispatch(removeFromFavorite(options))
     }, 400)
   }
   

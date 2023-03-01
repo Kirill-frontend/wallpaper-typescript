@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { downloadPhoto, getFavoritesAsync, initPhotosAsync } from '../redux/actions'
+import { downloadPhoto, initPhotos } from '../redux/slicers/gallery.slice'
 
 import Navbar from '../components/Navbar';
 import Photo from '../components/Photo';
@@ -11,19 +11,22 @@ import Loader from '../components/Loader';
 import Nothing from '../components/Nothing';
 
 import { PostType } from '../utils/types';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
+import { getFavorites } from './../redux/slicers/favorites.slice';
+import { showToast } from '../redux/slicers/toast.slice';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    dispatch(initPhotosAsync())
-    dispatch(getFavoritesAsync())
+    dispatch(initPhotos())
+    dispatch(getFavorites())
+    dispatch(showToast('Some toast text'))
   }, [dispatch])
 
-  const posts = useSelector((state: RootState) => (state.galleryReduce.posts))
-  const isLoading = useSelector((state: RootState) => (state.loadingReduce.loading))
+  const posts = useSelector((state: RootState) => (state.gallery.posts))
+  const isLoading = useSelector((state: RootState) => (state.loading.loading))
 
   useEffect(() => {
     setLoading(isLoading)

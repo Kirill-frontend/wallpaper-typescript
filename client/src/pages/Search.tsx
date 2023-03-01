@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Navbar';
 import Photo from '../components/Photo';
 import Nothing from '../components/Nothing';
-
-import { downloadPhoto, searchBeginAsync } from '../redux/actions';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
 import { PostType } from '../utils/types';
+import { search } from './../redux/slicers/search.slice';
+import { downloadPhoto } from './../redux/slicers/gallery.slice';
 
 
 
@@ -16,11 +16,11 @@ const Search: React.FC = () => {
   const [photos, setPhotos] = useState<PostType[]>([])
   const dispatch = useDispatch()
 
-  const searchedPhotos = useSelector((state: RootState) => state.searchReduce.searched)
+  const searchedPhotos = useSelector((state: RootState) => state.search.searched)
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(searchBeginAsync(inputSearch))
+    dispatch(search(inputSearch))
   }
 
   useEffect(() => {

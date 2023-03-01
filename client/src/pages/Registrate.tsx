@@ -1,18 +1,19 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Navbar from '../components/Navbar';
-import { registration } from '../redux/actions';
+import {registration} from "../redux/slicers/auth.slice"
+
 
 const Registrate: React.FC = () => {
   const dispatch = useDispatch()
-  const [registrateEmail, setRegistrateEmail] = useState<string>('')
-  const [registratePassword, setRegistratePassword] = useState<string>('')
-  const [registrateUsername, setRegistrateUserName] = useState<string>('')
+  const [email, setRegistrateEmail] = useState<string>('')
+  const [password, setRegistratePassword] = useState<string>('')
+  const [username, setRegistrateUserName] = useState<string>('')
 
 
   const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(registration(registrateEmail, registratePassword, registrateUsername))
+    dispatch(registration({email, password, username}))
   }
 
   return (
@@ -22,19 +23,19 @@ const Registrate: React.FC = () => {
         <form className="form-sign" onSubmit={registerHandler}>
           <div className="row">
             <div className="input-field">
-              <input id="register-email" onChange={(event) => setRegistrateEmail(event.target.value)} type="email" />
+              <input id="register-email" onChange={(event) => setRegistrateEmail(event.target.value)} value={email} type="email" />
               <label htmlFor="register-email">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field">
-              <input id="username" onChange={(event) => setRegistrateUserName(event.target.value)} type="text" />
+              <input id="username" onChange={(event) => setRegistrateUserName(event.target.value)} type="text" value={username} />
               <label htmlFor="username">Username</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field">
-              <input id="register-password" onChange={(event) => setRegistratePassword(event.target.value)} type="password" />
+              <input id="register-password" onChange={(event) => setRegistratePassword(event.target.value)} type="password" value={password} />
               <label htmlFor="register-password">Password</label>
             </div>
           </div>

@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import Navbar from '../components/Navbar';
-import { addPhotoAsync } from '../redux/actions';
-
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
+import { addPhoto } from '../redux/slicers/gallery.slice';
 
 const Create: React.FC = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState<boolean>(false)
   const [userId, setUserId] = useState<string>('')
 
-  const userIdState = useSelector((state: RootState) => state.authReduce.currentUser?.id)
-  const isAuth = useSelector((state: RootState) => state.authReduce.isAuth)
-  const isLoading = useSelector((state: RootState) => (state.loadingReduce.loading))
+  const userIdState = useSelector((state: RootState) => state.auth.currentUser?.id)
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth)
+  const isLoading = useSelector((state: RootState) => (state.loading.loading))
 
   useEffect(() => {
     if (userIdState) {
@@ -29,7 +26,7 @@ const Create: React.FC = () => {
     event.preventDefault()
     event.target.elements.userId.value = userId
 
-    dispatch(addPhotoAsync(event.target))
+    dispatch(addPhoto(event.target))
   }
 
 

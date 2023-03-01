@@ -1,7 +1,7 @@
 export type PostStatisticType = {
   favorites: number
   downloads: number
-  like: number
+  likes: number
 }
 
 export type PostType = {

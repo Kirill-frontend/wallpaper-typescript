@@ -1,4 +1,4 @@
-export default async function request(url, method = 'GET', body = null, headers = {}) {
+export default async function request(url: string, method = 'GET', body: any, headers: any = {}) {
   try {
     if (body) {
       body = JSON.stringify(body)

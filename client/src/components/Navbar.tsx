@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
 
 type NavbarPropsType = {
   activeElement: string
 }
 
 const Navbar: React.FC<NavbarPropsType> = ({ activeElement }) => {
-  const isAuth = useSelector((state: RootState) => state.authReduce.isAuth)
+  const isAuth = useSelector((state: RootState) => state.auth.isAuth)
 
   return (
     <>

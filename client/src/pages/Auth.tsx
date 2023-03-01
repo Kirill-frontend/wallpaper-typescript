@@ -2,8 +2,9 @@ import React, { FormEvent } from 'react';
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import { useDispatch } from 'react-redux'
-import { login } from '../redux/actions';
+// import { login } from '../redux/actions';
 import { Link } from 'react-router-dom';
+import { login } from './../redux/slicers/auth.slice';
 
 
 const Auth: React.FC = () => {
@@ -14,7 +15,7 @@ const Auth: React.FC = () => {
 
   const loginHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(login(loginEmail, loginPassword))
+    dispatch(login({email: loginEmail, password: loginPassword}))
   }
 
 

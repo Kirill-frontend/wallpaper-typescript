@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import Navbar from '../../components/Navbar';
-
-import { logout, getOwnPhotosAsync } from '../../redux/actions';
-import { RootState } from '../../redux/reducers';
+import { RootState } from '../../redux/store';
+import { delUser } from '../../redux/slicers/auth.slice';
+import { getOwnPhotos } from './../../redux/slicers/myphotos.slice';
 
 
 
 const Profile: React.FC = () => {
-  const photosLength = useSelector((state: RootState) => state.getOwnPhotosReduce.photos.length)
-  const userData = useSelector((state: RootState) => state.authReduce.currentUser)
+  const photosLength = useSelector((state: RootState) => state.getOwnPhotos.photos.length)
+  const userData = useSelector((state: RootState) => state.auth.currentUser)
   const dispatch = useDispatch()
-  const [postsCount, setPostsCount] = useState<number>(0)
+  const [postsCount, setPostsCount] = useState<number>(0)  
   
 
-  const logoutHandler = (): void => {
-    dispatch(logout())
+  const logoutHandler = (): void => {    
+    localStorage.removeItem('token')
+    dispatch(delUser())
+    window.location.href = '/auth'
   }
 
   useEffect((): void => {
-    dispatch(getOwnPhotosAsync())
+    dispatch(getOwnPhotos())
   }, [dispatch])
 
   useEffect((): void => {        

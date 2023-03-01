@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addToFavoriteAsync, likePhoto, toastView, unlikePhoto } from '../redux/actions';
-import { RootState } from '../redux/reducers';
+import { RootState } from '../redux/store';
 import { HandlersType, PostType } from '../utils/types';
 
 import Popup from './Popup';
+import { addToFavorite } from './../redux/slicers/favorites.slice';
+import { showToast } from '../redux/slicers/toast.slice';
+import { likePhoto, unlikePhoto } from '../redux/slicers/gallery.slice';
 
 type PhotoPropsType = {
   options: PostType
@@ -23,18 +25,18 @@ const Photo: React.FC<PhotoPropsType> = ({ options, handlers }) => {
 
   const { downloadHandler } = handlers
 
-  const isAuth = useSelector((state: RootState) => (state.authReduce.isAuth))
-  const favoritePosts = useSelector((state: RootState) => state.favoriteReduce.favorites)    
+  const isAuth = useSelector((state: RootState) => (state.auth.isAuth))
+  const favoritePosts = useSelector((state: RootState) => state.favorite.favorites)    
 
   const favoriteAddHandler = () => {
     if (isAuth) {
       setDoAnim(true)
       setTimeout(() => {
-        dispatch(addToFavoriteAsync(options))
+        dispatch(addToFavorite(options))
         setVisibility(true)
       }, 1000);
     } else {
-      dispatch(toastView('You must be authorizate for adding wallpaper in favorites'))
+      dispatch(showToast('You must be authorizate for adding wallpaper in favorites'))
     }
   }
 
@@ -48,7 +50,7 @@ const Photo: React.FC<PhotoPropsType> = ({ options, handlers }) => {
         setIsLiked(false)
       }
     } else {
-      dispatch(toastView('You must be authorizate for adding wallpaper in favorites'))
+      dispatch(showToast('You must be authorizate for adding wallpaper in favorites'))
     }
   }
 

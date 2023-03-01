@@ -10,8 +10,8 @@
         "SportCar"
       ],
       "statistic": {
-        "favorites": 0,
-        "downloads": 0,
+        "favorites": 4,
+        "downloads": 2,
         "like": 0,
         "likes": 7
       }
@@ -32,17 +32,19 @@
       }
     },
     {
-      "title": "Anime Art",
-      "author": "BMWDro4er",
-      "photo": "http://localhost:5000/upload/tristan-yajuu-bour-maskportrait.jpg",
-      "id": "fc463943-6ca8-4f06-aded-8aaa74a51dfc",
+      "title": "hoodwink",
+      "author": "Kirill",
+      "photo": "http://localhost:5000/upload/hoodwink-dota-2-4k-wallpaper-uhdpaper.com-742@1@f.jpg",
+      "id": "1d27a2f9-7c9f-4851-8dcf-23d62fc833a0",
       "tags": [
-        "anime"
+        "dota2",
+        "dotaheroes",
+        "squirrel"
       ],
       "statistic": {
         "favorites": 0,
         "downloads": 0,
-        "likes": 4
+        "likes": 0
       }
     }
   ],
@@ -55,7 +57,8 @@
       "favorites": [],
       "posts": [
         "371ddaaf-5e6b-44e0-811d-c4f6d90bcfa8",
-        "3354d5a6-feea-4cd2-a875-915b7d04d375"
+        "3354d5a6-feea-4cd2-a875-915b7d04d375",
+        "1d27a2f9-7c9f-4851-8dcf-23d62fc833a0"
       ],
       "liked": []
     },
@@ -72,6 +75,15 @@
         "3354d5a6-feea-4cd2-a875-915b7d04d375",
         "fc463943-6ca8-4f06-aded-8aaa74a51dfc"
       ]
+    },
+    {
+      "email": "qwe@gmail.ru",
+      "password": "$2a$05$5WHBeXR9pHa1N3TqF9j.YulmnVb8kyNN3P70dnVRKWi1oTG5XHXXe",
+      "username": "paltinik",
+      "id": "b9ec26eb-27a6-4298-b73f-476868e74272",
+      "favorites": [],
+      "posts": [],
+      "liked": []
     }
   ]
 }
