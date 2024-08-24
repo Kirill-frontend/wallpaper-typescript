@@ -11,7 +11,6 @@ type ModalPropsType = {
 const Modal: React.FC<ModalPropsType> = ({ close, statistic }) => {  
   const [isHide, setIsHide] = useState<boolean>(true)
 
-  
   const modalClickHandler = (): void => {
     setIsHide(false)
     setTimeout(() => {
@@ -25,8 +24,7 @@ const Modal: React.FC<ModalPropsType> = ({ close, statistic }) => {
         <div className="modal-content">
           <span className="button-close" onClick={modalClickHandler}></span>
           <h4>Statistic</h4>
-          <p>{`Added favorites: ${statistic!.favorites}`}</p>
-          <p>{`Downloads: ${statistic!.downloads}`}</p>                        
+          <p>{`Added favorites: ${statistic!.favorites}`}</p>                            
           <p>{`Likes: ${statistic!.likes}`}</p>                        
         </div>
       </div>

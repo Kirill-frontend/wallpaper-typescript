@@ -6,6 +6,11 @@ export default async function request(url: string, method = 'GET', body: any, he
     }
 
     const response = await fetch(url, { method, body, headers })
+
+    if (!response.ok) {
+      return false
+    }
+
     const json = response.json()
 
     return json

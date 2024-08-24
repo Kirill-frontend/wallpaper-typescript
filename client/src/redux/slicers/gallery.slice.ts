@@ -23,7 +23,6 @@ export const initPhotos = createAsyncThunk(
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       });
       dispatch(endLoading());
-      console.log(res);
       return res;
     } catch (error) {}
   }
@@ -32,14 +31,20 @@ export const initPhotos = createAsyncThunk(
 export const addPhoto = createAsyncThunk(
   "photo/add",
   async (form: HTMLFormElement, { dispatch }) => {
-    dispatch(beginLoading());
-    const res = await fetch(`${Url}upload/new`, {
-      method: "POST",
-      body: new FormData(form),
-    });
-    const json = await res.json();
-    dispatch(endLoading());
-    // dispatch(toastView(json.message))
+    try {
+      dispatch(beginLoading());
+      const res = await fetch(`${Url}upload/new`, {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const json = await res.json();
+      dispatch(endLoading());
+      window.location.href = '/'
+      // dispatch(toastView(json.message))
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 );
 
@@ -71,7 +76,7 @@ export const downloadPhoto = createAsyncThunk(
 
 export const likePhoto = createAsyncThunk("photo/like", async (post: PostType, { dispatch }) => {
   try {
-    const res = await fetch(`${Url}api/photo/like/${post.id}`, {
+    const res = await fetch(`${Url}api/photo/like/${post._id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -94,7 +99,7 @@ export const likePhoto = createAsyncThunk("photo/like", async (post: PostType, {
 
 export const unlikePhoto = createAsyncThunk('photo/unlike', async (post: PostType, {dispatch}) => {
   try {
-          const res = await fetch(`${Url}api/photo/unlike/${post.id}`, {
+          const res = await fetch(`${Url}api/photo/unlike/${post._id}`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }      

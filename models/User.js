@@ -1,17 +1,25 @@
-const { v4 } = require('uuid')
+const { Schema, default: mongoose } = require('mongoose')
+const Post = require('./Post')
 
-function User(email, password, username) {
-  const user = {
-    email,
-    password,
-    username,
-    id: v4(),
-    favorites: [],
-    posts: [],
-    liked: []
-  }
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  favorites: {
+    type: [Post.schema]    
+  },
+  liked: [String]
+})
 
-  return JSON.stringify(user)
-}
-
-module.exports = User
+module.exports = mongoose.model('User', UserSchema)

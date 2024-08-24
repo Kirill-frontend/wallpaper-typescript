@@ -1,1 +1,1 @@
-export const Url = 'http://localhost:5000/'
+export const Url = process.env.REACT_APP_BACKEND_URL

@@ -15,6 +15,7 @@ import { RootState } from '../redux/store';
 import { getFavorites } from './../redux/slicers/favorites.slice';
 import { showToast } from '../redux/slicers/toast.slice';
 
+
 const Home: React.FC = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState<boolean>(false)
@@ -48,18 +49,16 @@ const Home: React.FC = () => {
       <Navbar activeElement="home" />
       <div className="container">
         <main>
-          <ul className="collection">
-            {loading && <Loader />}
-            {posts.length ? posts.map((post: PostType) =>
-              (<Photo key={post.id}
-                options={post}
-                handlers={{
-                  downloadHandler
-                }}
-              />))
-              :
-              <Nothing>{messageForNothing}</Nothing>}
-          </ul>
+          {loading && <Loader />}
+          {posts.length ? posts.map((post: PostType) =>
+          (<Photo key={post._id}
+            options={post}
+            handlers={{
+              downloadHandler
+            }}
+          />))
+            :
+            <Nothing>{messageForNothing}</Nothing>}
         </main>
       </div>
     </>

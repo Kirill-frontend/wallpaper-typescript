@@ -11,19 +11,22 @@ import { addToFavorite } from './../redux/slicers/favorites.slice';
 import { showToast } from '../redux/slicers/toast.slice';
 import { likePhoto, unlikePhoto } from '../redux/slicers/gallery.slice';
 
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+
 type PhotoPropsType = {
   options: PostType
   handlers: HandlersType
 }
 
 
-const Photo: React.FC<PhotoPropsType> = ({ options, handlers }) => {
+const Photo = ({ options, handlers }: PhotoPropsType) => {
   const [doAnim, setDoAnim] = useState<boolean>(false)
   const [visibility, setVisibility] = useState<boolean>(false)
   const [isLiked, setIsLiked] = useState<boolean>(false)
   const dispatch = useDispatch()
 
   const { downloadHandler } = handlers
+  console.log('options: ', options)
 
   const isAuth = useSelector((state: RootState) => (state.auth.isAuth))
   const favoritePosts = useSelector((state: RootState) => state.favorite.favorites)    
@@ -57,33 +60,31 @@ const Photo: React.FC<PhotoPropsType> = ({ options, handlers }) => {
   useEffect(() => {
     if (favoritePosts.length) {
       favoritePosts.forEach((item: PostType) => {
-        if (item.id === options.id) {
+        if (item._id === options._id) {
           setVisibility(true)
         }
       })
     }
-  }, [favoritePosts, options.id])
+  }, [favoritePosts, options._id])
 
   useEffect(() => {
     setIsLiked(options.isLike)
   }, [options.isLike])
 
+  console.log(options)
+
   return (
     <>
-      <li className="collection-item col s6">
+
         <div className="card">
           <div className="card-image">
-            {/* <img src={options.photo} alt={options.title} onClick={slideShowHandler} /> */}
-            <LazyLoadImage
-              src={options.photo}
-              alt={options.title}
-              height='500px'
-            />
+            <img src={options.photo} alt={options.title} />
+
             <span className="card-title"> {options.title} </span>
             <span className="card-author "> {options.author} </span>
             <div className="card-tags ">
               {options.tags.map(tag => (
-                <a href="/" className="card-tag" key={`${options.id}-${tag}`}>
+                <a href={`/search?tag=${tag}`} className="card-tag" key={`${options._id}-${tag}`}>
                   {tag}
                 </a>
               ))}
@@ -99,7 +100,6 @@ const Photo: React.FC<PhotoPropsType> = ({ options, handlers }) => {
             <Popup handlers={{ downloadHandler }} statistic={options.statistic} options={options} />
           </div>
         </div>
-      </li>
     </>
   )
 }

@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarPropsType> = ({ activeElement }) => {
                   <NavLink to="/profile">Profile</NavLink>
                   <div className="my-dropdown-content">
                     <div className={`red accent-3 ${activeElement === 'profile' || activeElement === 'my' ? 'active' : ''}`} ><NavLink to="/my">My posts</NavLink></div>
-                    <div className={`red accent-3 ${activeElement === 'profile' || activeElement === 'my' ? 'active' : ''}`} ><NavLink to="/feedback">Feedback</NavLink></div>
+                    {/* <div className={`red accent-3 ${activeElement === 'profile' || activeElement === 'my' ? 'active' : ''}`} ><NavLink to="/feedback">Feedback</NavLink></div> */}
                   </div>
                 </li>
               </>

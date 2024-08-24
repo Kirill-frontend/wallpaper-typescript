@@ -54,7 +54,7 @@ const MyPosts: React.FC = () => {
           <ul className="collection">
             {loading && <Loader />}
             {posts.length ?
-              posts.map((post: PostType) => (<MyPhotos key={post.id}
+              posts.map((post: PostType) => (<MyPhotos key={post._id}
                 options={post}
                 handlers={{
                   deletePhotoHandler,

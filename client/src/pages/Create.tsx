@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../redux/store';
 import { addPhoto } from '../redux/slicers/gallery.slice';
 
-const Create: React.FC = () => {
+const Create = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState<boolean>(false)
   const [userId, setUserId] = useState<string>('')
 
-  const userIdState = useSelector((state: RootState) => state.auth.currentUser?.id)
   const isAuth = useSelector((state: RootState) => state.auth.isAuth)
+  // no-unsafe-optional-chaining
+  const userIdState = useSelector((state: RootState) => state.auth.currentUser?.id)
   const isLoading = useSelector((state: RootState) => (state.loading.loading))
 
   useEffect(() => {
@@ -22,7 +23,8 @@ const Create: React.FC = () => {
   }, [userIdState])
 
 
-  const formHandler = (event: any) => {    
+
+  const formHandler = (event: any) => {
     event.preventDefault()
     event.target.elements.userId.value = userId
 

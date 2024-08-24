@@ -16,6 +16,7 @@ type PopupPropsType = {
 
   const { deletePhotoHandler, downloadHandler } = handlers
 
+
   const toggleMenu = () => {
     setUncover(prevState => !prevState)
   }  
@@ -36,6 +37,7 @@ type PopupPropsType = {
         <div className="menu__content">
           <ul className="menu__content__list">
             <li><button className={`btn btn-deletePhoto waves-effect waves-light green`} onClick={() => downloadHandler!(options)} > <i className="material-icons tiny">file_download</i>Download</button></li>
+            {/* <li><a href={options.photo} className={`btn btn-deletePhoto waves-effect waves-light green`}> <i className="material-icons tiny">file_download</i>Download</a></li> */}
             {isOwnOptions && <li><button className={`btn btn-deletePhoto waves-effect waves-light red`} onClick={() => deletePhotoHandler!(options)} > <i className="material-icons tiny">delete_forever</i>Delete</button></li>}
             {isOwnOptions && <li><button className={`btn btn-deletePhoto waves-effect waves-light blue`} onClick={openModalStatistic} > <i className="material-icons tiny">arrow_upward</i>Statistic</button></li>}
           </ul>

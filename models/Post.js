@@ -1,20 +1,38 @@
-const { v4 } = require("uuid")
+const { Schema, default: mongoose } = require("mongoose")
 
-function Post(title, filename, author, tags) {
-  const post = {
-    title,
-    author,
-    photo: `http://localhost:5000/upload/${filename}`,
-    id: v4(),
-    tags,
-    statistic: {
-      favorites: 0,
-      downloads: 0,
-      likes: 0
-    }    
-  }
 
-  return post
-}
+const PostSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  authorId: {
+    type: String,
+    required: true
+  },
+  photo: {
+    type: String,
+    required: true
+  },
+  tags: {
+    type: [String],
+    required: true
+  },
+  statistic: {
+    type: {
+      favorites: Number,      
+      likes: Number
+    },
+    required: true
+  },
+  isLike: {type: Boolean, default: false}
+})
+
+const Post = mongoose.model('Post', PostSchema)
+
 
 module.exports = Post

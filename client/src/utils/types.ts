@@ -7,7 +7,7 @@ export type PostStatisticType = {
 export type PostType = {
   title: string
   author: string
-  id: string
+  _id: string
   statistic: PostStatisticType
   tags: string[]
   photo: string

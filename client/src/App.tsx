@@ -19,7 +19,6 @@ import { auth } from './redux/slicers/auth.slice';
 
 import 'materialize-css/dist/css/materialize.css'
 import "materialize-css/dist/js/materialize"
-import Feedback from './pages/Feedback';
 import { hideToast } from './redux/slicers/toast.slice';
 
 
@@ -58,8 +57,7 @@ function App() {
           <Route path="/register" component={Registrate} />
           <Route path="/profile" component={Profile} />
           <Route path="/my" component={MyPosts} />
-          <Route path="/search" component={Search} />
-          <Route path="/feedback" component={Feedback} />
+          <Route path="/search" component={Search} />          
         </Switch>
       </Router>
     </>

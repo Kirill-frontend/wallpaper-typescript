@@ -7,28 +7,31 @@ const mime = require('mime')
 const statisticPhoto = require('../functions/statistic')
 const { default: fetch } = require('node-fetch')
 const config = require('config')
+const Post = require('../models/Post')
 
-const urlPosts = config.get('URL-Photos')
-
+const localUrl = 'https://localhost:5000'
 
 
 router.get('/:picname', async (req, res) => {  
 
   const reqPictureName = req.path  
 
+  
+  
   const filename = reqPictureName.split('/')[1]      
+  console.log(filename)
   const file = path.resolve(`pictures/${filename}`)    
     
   if (!fs.existsSync(file)) {    
     res.json({message: 'Server Error when taking files'})
   }  
 
-  const resPhotos = await fetch(urlPosts)
-  let jsonPhotos = await resPhotos.json()
 
-  jsonPhotos = jsonPhotos.filter(photo => photo.photo.includes(filename))
+  let jsonPhotos = await Post.findOne({photo: `${localUrl}/upload/${filename}`})  
 
-  statisticPhoto('ADD_DOWNLOAD', jsonPhotos[0].id)
+  console.log(jsonPhotos)
+
+  // statisticPhoto('ADD_DOWNLOAD', jsonPhotos._id)
   
   res.download(file)
 })

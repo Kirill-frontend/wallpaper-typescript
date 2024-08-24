@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 
+require('dotenv').config()
+
 const cors = require('cors')
 
 const multer = require('multer')
+const { default: mongoose } = require('mongoose')
 
 const PORT = process.env.PORT || 5000
 
@@ -25,6 +28,20 @@ const fileFilter = (req, file, cb) => {
     cb(null, false)
   }
 }
+
+const connectDb = async () => {
+  try {    
+    await mongoose.connect(process.env.MONGODB_URL)
+    console.log('MongoDB connected')
+  } catch (errorResponse) {
+    console.log('MongoDB is\'not connected')
+    console.error(errorResponse.errmsg)
+
+  }
+}
+
+connectDb()
+
 
 
 app.use(express.static(__dirname))
@@ -75,11 +92,11 @@ app.use('/search', require('./routes/search.routes'))
 // Сделать анимации в модалке +
 // Обработать ошибки когда БД чист +
 // Likes +
-// Переписать на RTK + и RTKQUERY
+// Переписать на RTK + и RTKQUERY 
 // Сделать нормальные Toast 
 // Dark Theme
 // Сделать увеличение по нажатию / слайдер 
-// Обратная связь 
+// Обратная связь  
 // Систему оповещений
 // Посмотреть посты пользователя
 // Подписки на пользователя
@@ -87,4 +104,7 @@ app.use('/search', require('./routes/search.routes'))
 // Email verify
 // Добавить везде лоадеры
 
-app.listen(PORT, () => console.log(`Server has been started  http://localhost:${PORT} ...`))
+app.listen(PORT, () => {
+  console.log(`Server has been started  http://localhost:${PORT} ...`)
+
+})

@@ -46,7 +46,8 @@ try {
     const json = await res.json()
     // dispatch(toastView(json.message))        
     dispatch(endLoading())
-    return json.posts
+    
+    window.location.reload()
   }
 } catch (error) {
   
@@ -61,8 +62,8 @@ export const myPhotosSlice = createSlice({
 
   },
   extraReducers: (builder) => {
-    builder.addCase(getOwnPhotos.fulfilled, (state, {payload}) => {
-      state.photos = payload
+    builder.addCase(getOwnPhotos.fulfilled, (state, action) => {
+      state.photos = action.payload
     })
   }
 });

@@ -24,14 +24,19 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }: authData, { dispatch }) => {
     try {
-    dispatch(beginGlobalLoading())
+      dispatch(beginGlobalLoading())
       const res = await request(`${Url}api/auth/login`, "POST", {
         email,
         password,
       });
-      if(!res.token) throw new Error("not auth");
-      
-      
+
+      if (!res) {
+        dispatch(endGlobalLoading())
+        return false
+      }
+      if (!res.token) return false;
+
+
       localStorage.setItem("token", res.token);
       window.location.href = "/profile";
       dispatch(endGlobalLoading())
@@ -54,12 +59,16 @@ export const auth = createAsyncThunk("auth/auth", async (_, { dispatch }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    if (!res) {
+      dispatch(endGlobalLoading())
+      return false
+    }
     const json = await res.json();
     dispatch(endGlobalLoading())
     if (res.statusText === "Unauthorized") {
-      localStorage.removeItem("token");      
+      localStorage.removeItem("token");
       return false;
-    }    
+    }
     return json;
   } catch (e) {
     console.log(e);
@@ -70,7 +79,7 @@ export const registration = createAsyncThunk(
   "auth/registrate",
   async ({ email, password, username }: regData, { dispatch }) => {
     try {
-    dispatch(beginGlobalLoading())
+      dispatch(beginGlobalLoading())
 
       const res = await request(`${Url}api/auth/registation`, "POST", {
         email,
@@ -79,7 +88,7 @@ export const registration = createAsyncThunk(
       });
       // dispatch(toastView(res.message));
       dispatch(endGlobalLoading())
-      window.location.href = "/auth";
+      // window.location.href = "/";
     } catch (e) {
       console.log(e);
       throw e;
@@ -98,19 +107,21 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state: AuthReduceType, action) => {
-      state.currentUser = action.payload.user;
-      state.isAuth = true;
-    });
-    builder.addCase(auth.fulfilled, (state: AuthReduceType, action) => {      
-      if (action.payload){
+      if (action.payload) {
         state.currentUser = action.payload.user;
         state.isAuth = true;
-      } else {        
+      }
+    });
+    builder.addCase(auth.fulfilled, (state: AuthReduceType, action) => {
+      if (action.payload) {
+        state.currentUser = action.payload.user;
+        state.isAuth = true;
+      } else {
         state.isAuth = false
       }
     });
   },
 });
 
-export const {delUser} = authSlice.actions;
+export const { delUser } = authSlice.actions;
 export default authSlice.reducer;

@@ -50,7 +50,7 @@ const Favorite: React.FC = () => {
           <h1>Favorite Page</h1>
           <ul className="collection row">
             {loading && <Loader />}
-            {posts.length ? posts.map((post: PostType) => (<FavoritePhoto key={post.id} options={post} handlers={{ downloadHandler }} />)) : <Nothing>{messageForNothing}</Nothing>}
+            {posts.length ? posts.map((post: PostType) => (<FavoritePhoto key={post._id} options={post} handlers={{ downloadHandler }} />)) : <Nothing>{messageForNothing}</Nothing>}
           </ul>
         </main>
       </div>

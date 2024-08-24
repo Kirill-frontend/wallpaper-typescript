@@ -8,14 +8,14 @@ import { getOwnPhotos } from './../../redux/slicers/myphotos.slice';
 
 
 
-const Profile: React.FC = () => {
+const Profile = () => {
   const photosLength = useSelector((state: RootState) => state.getOwnPhotos.photos.length)
   const userData = useSelector((state: RootState) => state.auth.currentUser)
   const dispatch = useDispatch()
-  const [postsCount, setPostsCount] = useState<number>(0)  
-  
+  const [postsCount, setPostsCount] = useState<number>(0)
 
-  const logoutHandler = (): void => {    
+
+  const logoutHandler = (): void => {
     localStorage.removeItem('token')
     dispatch(delUser())
     window.location.href = '/auth'
@@ -25,12 +25,12 @@ const Profile: React.FC = () => {
     dispatch(getOwnPhotos())
   }, [dispatch])
 
-  useEffect((): void => {        
-      if (photosLength) {
-        setPostsCount(photosLength)
-      } else {
-        setPostsCount(0)
-      }    
+  useEffect((): void => {
+    if (photosLength) {
+      setPostsCount(photosLength)
+    } else {
+      setPostsCount(0)
+    }
   }, [photosLength])
 
 
@@ -42,21 +42,28 @@ const Profile: React.FC = () => {
           <ul className="collection">
             <li className="collection-item">
               <div className="profile_card">
-                <p>Your email: {userData?.email} </p>
-                <p>Your username: {userData?.username} </p>
+                {userData && (
+                  <>
+                    <p>Your email: {userData.email} </p>
+
+                    <p>Your username: {userData.username} </p>
+                  </>
+                )}
+
+
               </div>
             </li>
             <li className="collection-item">
               <button className="btn-small">
                 <Link to="/my">
                   My posts ({postsCount})
-              </Link>
+                </Link>
               </button>
             </li>
             <li className="collection-item">
               <button className="btn-small" onClick={logoutHandler}>
                 Log out
-          </button>
+              </button>
             </li>
           </ul>
         </main>

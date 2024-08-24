@@ -8,6 +8,7 @@ import { RootState } from '../redux/store';
 import { PostType } from '../utils/types';
 import { search } from './../redux/slicers/search.slice';
 import { downloadPhoto } from './../redux/slicers/gallery.slice';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -15,6 +16,15 @@ const Search: React.FC = () => {
   const [inputSearch, setInputSearch] = useState<string>('')
   const [photos, setPhotos] = useState<PostType[]>([])
   const dispatch = useDispatch()
+  const history = useHistory()
+  
+  useEffect(() => {
+    const historyTag = history.location.search.split('=')[1]
+    if (historyTag) {      
+      dispatch(search(historyTag))
+    }
+  }, [])
+
 
   const searchedPhotos = useSelector((state: RootState) => state.search.searched)
 
@@ -49,7 +59,7 @@ const Search: React.FC = () => {
           </div>
           <ul className="collection">
             {!photos.length && <Nothing>No searched photos</Nothing>}
-            {photos.map((post: PostType) => (<Photo key={post.id} options={post} handlers={{downloadHandler}} />))}            
+            {photos.map((post: PostType) => (<Photo key={post._id} options={post} handlers={{downloadHandler}} />))}            
           </ul>
 
         </div>

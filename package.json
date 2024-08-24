@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "server": "nodemon app",
+    "server": "nodemon app ",
     "mock": "json-server -w db.json -p 5500",
-    "client": "npm run start --prefix client",
+    "client": "npm run start --prefix client --port 5000",
     "dev": "concurrently \"npm run server \" \"npm run client\" \"npm run mock\""
   },
   "keywords": [
@@ -19,20 +19,24 @@
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "@splidejs/react-splide": "^0.7.12",
+    "@typescript-eslint/parser": "^7.13.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "config": "^3.3.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "express-validator": "^6.9.0",
     "gmail-send": "^1.8.10",
     "json-server": "^0.17.1",
     "jsonwebtoken": "^8.5.1",
     "mime": "^2.4.7",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.3",
     "multer": "^1.4.2",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.17",
-    "react-redux": "^8.0.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
